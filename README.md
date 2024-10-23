@@ -10,8 +10,9 @@ How to use it:
 
 Executing the file
 
-cd Sys_Info_v
+                cd Sys_Info_v
 
-bash Sys_Info_v1 or
+                bash Sys_Info_v1 
+OR
 
-./Sys_Info_v1
+                ./Sys_Info_v1
