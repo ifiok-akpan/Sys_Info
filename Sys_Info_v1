@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Author: Ifiok
+# Date: 09/10/2024
+
+# read-menu: a menu-driven system information program
+
+while true; do
+    clear  # Clear the terminal screen at the start of each loop
+
+    echo "
+    Please Select:
+
+    1. Display System Information
+    2. Display Disk Space
+    3. Display Home Space Utilization
+    0. Quit
+    "
+    read -p "Enter Selection [0-3] > "
+
+    # Check if the input is valid
+    if [[ "$REPLY" =~ ^[0-3]$ ]]; then
+        case "$REPLY" in
+            0) 
+                echo "Program terminated."
+                exit 0
+                ;;
+            1) 
+                echo "Hostname: $HOSTNAME"
+                uptime
+                ;;
+            2) 
+                df -h
+                ;;
+            3) 
+                if [[ "$(id -u)" -eq 0 ]]; then
+                    echo "Home Space Utilization (All users)"
+                    du -sh /home/*
+                else
+                    echo "Home Space Utilization for $USER"
+                    du -sh "$HOME"
+                fi
+                ;;
+        esac
+    else
+        echo "Invalid entry" >&2
+    fi
+
+    # Pause before showing the menu again
+    read -p "Press [Enter] key to continue..."
+done
+
